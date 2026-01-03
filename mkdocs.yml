@@ -1,0 +1,132 @@
+# project
+site_name: Helm Charts
+site_description: Another repository with lightweight Helm Charts.
+site_author: Pascal Iske
+site_url: https://charts.pascaliske.dev
+
+# repository
+repo_name: pascaliske/helm-charts
+repo_url: https://github.com/pascaliske/helm-charts
+
+# theme
+theme:
+  name: material
+  logo: assets/logo.svg
+  favicon: assets/favicon.png
+  language: en
+  palette:
+    - scheme: default
+      media: "(prefers-color-scheme: light)"
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+    - scheme: slate
+      primary: lime
+      accent: lime
+      media: "(prefers-color-scheme: dark)"
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+  font:
+    text: Lato
+    code: Source Code Pro
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - content.code.annotate
+    - content.tabs.link
+    - navigation.footer
+    - navigation.instant
+    - navigation.sections
+    - navigation.tracking
+    - navigation.top
+    - toc.follow
+    - toc.integrate
+
+# navigation
+nav:
+  - Introduction: index.md
+  - Charts:
+      - clickhouse: charts/clickhouse.md
+      - cloudflare-dyndns: charts/cloudflare-dyndns.md
+      - cloudflared: charts/cloudflared.md
+      - code-server: charts/code-server.md
+      - ctfd: charts/ctfd.md
+      - digitalocean-dyndns: charts/digitalocean-dyndns.md
+      - fritzbox-exporter: charts/fritzbox-exporter.md
+      - gitlab: charts/gitlab.md
+      - hammond: charts/hammond.md
+      - home-assistant: charts/home-assistant.md
+      - homer: charts/homer.md
+      - keycloak: charts/keycloak.md
+      - linkding: charts/linkding.md
+      - pairdrop: charts/pairdrop.md
+      - paperless: charts/paperless.md
+      - plausible: charts/plausible.md
+      - plausible-exporter: charts/plausible-exporter.md
+      - redis: charts/redis.md
+      - traefik-errors: charts/traefik-errors.md
+      - unbound: charts/unbound.md
+      - uptime-kuma: charts/uptime-kuma.md
+      - vaultwarden: charts/vaultwarden.md
+      - vikunja: charts/vikunja.md
+
+# socials
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/pascaliske
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/pascaliske
+    - icon: fontawesome/brands/mastodon
+      link: https://hachyderm.io/@pascaliske
+    - icon: fontawesome/brands/docker
+      link: https://hub.docker.com/u/pascaliske
+  analytics:
+    provider: plausible
+    domain: charts.pascaliske.dev
+    src: https://analytics.pascaliske.dev/js/script.outbound-links.js
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: happy
+          note: >-
+            Thanks for your feedback!
+
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: sad
+          note: >-
+            Thanks for your feedback! Help me improve this page by
+            opening a <a href="https://github.com/pascaliske/helm-charts/issues/new" target="_blank" rel="noopener">issue on GitHub</a>.
+
+# customizations
+extra_css:
+  - styles/custom.css
+
+# additional plugins
+plugins:
+  - search
+  - social
+  - material-plausible
+
+# code highlighting
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.tabbed:
+      alternate_style: true

@@ -1,0 +1,116 @@
+{
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectOwner": "pascaliske",
+  "projectName": "helm-charts",
+  "files": [
+    "README.md"
+  ],
+  "skipCi": true,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributorsPerLine": 7,
+  "contributors": [
+    {
+      "login": "johanneskastl",
+      "name": "Johannes Kastl",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26167225?v=4",
+      "profile": "https://www.b1-systems.de",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "catrielmuller",
+      "name": "Catriel Müller",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2272323?v=4",
+      "profile": "https://www.linkedin.com/in/catrielmuller",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "astralhpi",
+      "name": "Jake(Jaehak Song)",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1402102?v=4",
+      "profile": "https://github.com/astralhpi",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "rabejens",
+      "name": "Jens Rabe",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8402886?v=4",
+      "profile": "https://github.com/rabejens",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "Dzeri96",
+      "name": "Dzeri96",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13813363?v=4",
+      "profile": "http://blog.dzeri.me",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "kalmarz",
+      "name": "Zoltan Kalmar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/65083756?v=4",
+      "profile": "https://github.com/kalmarz",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "MoJo2600",
+      "name": "Christian Erhardt",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2462817?v=4",
+      "profile": "http://www.mojo2k.de",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "MaxenceG2M",
+      "name": "MaxenceG2M",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4601728?v=4",
+      "profile": "https://github.com/MaxenceG2M",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Yannig",
+      "name": "Yannig",
+      "avatar_url": "https://avatars.githubusercontent.com/u/277760?v=4",
+      "profile": "http://lesaventuresdeyannigdanslemondeit.blogspot.fr/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "diego-ojeda-binbash",
+      "name": "Diego OJeda (BinBash)",
+      "avatar_url": "https://avatars.githubusercontent.com/u/38356409?v=4",
+      "profile": "https://www.binbash.com.ar/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Fran-Rg",
+      "name": "Fran R",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4979840?v=4",
+      "profile": "https://github.com/Fran-Rg",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "commitType": "docs"
+}

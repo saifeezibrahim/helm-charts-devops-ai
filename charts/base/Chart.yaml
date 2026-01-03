@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://json.schemastore.org/chart.json
+apiVersion: v2
+type: library
+name: base
+description: A Helm chart for Kubernetes
+version: 1.3.0
+appVersion: ""
+
+home: https://charts.pascaliske.dev
+sources:
+  - https://github.com/pascaliske/helm-charts
+keywords:
+  - library-chart
+maintainers:
+  - name: pascaliske
+    email: info@pascaliske.dev
+    url: https://pascaliske.dev
+
+annotations:
+  # possible kinds: added, changed, deprecated, removed, fixed, security
+  artifacthub.io/changes: |
+    - kind: added
+      description: 'Added helpers for extra objects.'
