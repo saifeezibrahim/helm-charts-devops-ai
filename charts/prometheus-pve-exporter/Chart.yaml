@@ -1,0 +1,33 @@
+---
+apiVersion: v2
+name: prometheus-pve-exporter
+description: A Helm chart for bootstrapping a PVE Exporter. Uses ServiceMonitor to collect metrics.
+type: application
+version: 2.6.1
+appVersion: "3.8.0"
+home: https://github.com/christianhuth/helm-charts
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/prometheus-pve-exporter/icon.svg
+maintainers:
+  - name: christianhuth
+    email: christian@knell.it
+sources:
+  - https://github.com/prometheus-pve/prometheus-pve-exporter
+annotations:
+  artifacthub.io/alternativeName: "pve-exporter"
+  artifacthub.io/category: monitoring-logging
+  artifacthub.io/changes: |
+    - kind: fixed
+      description: problem in hpa template
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
+  artifacthub.io/screenshots: |
+    - title: Add an user inside of Proxmox, that will be used for the Exporter.
+      url: https://xinux.net/images/6/6e/Prometheus-proxmox-grafana-user.png
+    - title: Add permissions for this user.
+      url: https://xinux.net/images/5/5d/REDACTED.png
+    - title: Visualize the data collected with Grafana.
+      url: https://grafana.com/api/dashboards/10347/images/6529/image
+  artifacthub.io/signKey: |
+    fingerprint: REDACTED
+    url: https://charts.christianhuth.de/public.key

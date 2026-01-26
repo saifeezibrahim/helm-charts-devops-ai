@@ -1,0 +1,24 @@
+apiVersion: v2
+name: syncserver
+description: Helm chart for Firefox Syncserver
+type: application
+version: 1.2.0
+appVersion: "latest"
+home: https://github.com/christianknell/helm-charts
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncserver/icon.svg
+maintainers:
+  - name: christianhuth
+    email: christian@knell.it
+sources:
+  - https://hub.docker.com/r/mozilla/syncserver/
+  - https://github.com/mozilla-services/syncserver
+annotations:
+  artifacthub.io/changes: |
+    - kind: added
+      description: support for Gateway API routes
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
+  artifacthub.io/signKey: |
+    fingerprint: REDACTED
+    url: https://charts.christianhuth.de/public.key

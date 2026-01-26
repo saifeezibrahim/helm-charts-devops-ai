@@ -1,0 +1,319 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"node-access.fullname\"`",
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "properties": {
+        "pullPolicy": {
+          "default": "Always",
+          "description": "image pull policy",
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "registry": {
+          "default": "docker.io",
+          "description": "image registory",
+          "title": "registry",
+          "type": "string"
+        },
+        "repository": {
+          "default": "busybox",
+          "description": "image repository",
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "1.37.0",
+          "description": "Overrides the image tag",
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "registry",
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+      "items": {
+        "required": []
+      },
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `node-access`",
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "nodeAccess": {
+      "properties": {
+        "accessMode": {
+          "default": "deployment",
+          "description": "How to deploy the Pods to access the host system: daemonset or deployment",
+          "title": "accessMode",
+          "type": "string"
+        },
+        "hostPaths": {
+          "description": "List of additional paths on the host that should be mounted into the container",
+          "items": {
+            "required": []
+          },
+          "title": "hostPaths",
+          "type": "array"
+        },
+        "nodePlacement": {
+          "description": "- name: dev\n  host: /dev\n  container: /node-fs/dev",
+          "properties": {
+            "affinity": {
+              "description": "Affinity settings for pod assignment",
+              "required": [],
+              "title": "affinity",
+              "type": "object"
+            },
+            "nodeName": {
+              "default": "",
+              "description": "Request to schedule this pod onto a specific node",
+              "title": "nodeName",
+              "type": "string"
+            },
+            "nodeSelector": {
+              "description": "Node labels for pod assignment",
+              "required": [],
+              "title": "nodeSelector",
+              "type": "object"
+            },
+            "tolerations": {
+              "description": "Toleration labels for pod assignment",
+              "items": {
+                "required": []
+              },
+              "title": "tolerations",
+              "type": "array"
+            },
+            "topologySpreadConstraints": {
+              "description": "how a group of pods ought to spread across topology domains",
+              "items": {
+                "required": []
+              },
+              "title": "topologySpreadConstraints",
+              "type": "array"
+            }
+          },
+          "required": [
+            "nodeName",
+            "affinity",
+            "nodeSelector",
+            "tolerations",
+            "topologySpreadConstraints"
+          ],
+          "title": "nodePlacement",
+          "type": "object"
+        }
+      },
+      "required": [
+        "accessMode",
+        "hostPaths",
+        "nodePlacement"
+      ],
+      "title": "nodeAccess",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "description": "Annotations to be added to the pods",
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "description": "pod-level security context",
+      "properties": {
+        "runAsGroup": {
+          "default": 0,
+          "title": "runAsGroup",
+          "type": "integer"
+        },
+        "runAsNonRoot": {
+          "default": false,
+          "title": "runAsNonRoot",
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 0,
+          "title": "runAsUser",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "runAsGroup",
+        "runAsNonRoot",
+        "runAsUser"
+      ],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "description": "Number of replicas. Only used if `accessNode.accessMode` equals `deployment`",
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "description": "Resource limits and requests for the controller pods.",
+      "properties": {
+        "limits": {
+          "properties": {
+            "cpu": {
+              "default": "200m",
+              "title": "cpu",
+              "type": "string"
+            },
+            "memory": {
+              "default": "256Mi",
+              "title": "memory",
+              "type": "string"
+            }
+          },
+          "required": [
+            "cpu",
+            "memory"
+          ],
+          "title": "limits",
+          "type": "object"
+        },
+        "requests": {
+          "properties": {
+            "cpu": {
+              "default": "100m",
+              "title": "cpu",
+              "type": "string"
+            },
+            "memory": {
+              "default": "128Mi",
+              "title": "memory",
+              "type": "string"
+            }
+          },
+          "required": [
+            "cpu",
+            "memory"
+          ],
+          "title": "requests",
+          "type": "object"
+        }
+      },
+      "required": [
+        "limits",
+        "requests"
+      ],
+      "title": "resources",
+      "type": "object"
+    },
+    "revisionHistoryLimit": {
+      "default": 10,
+      "description": "The number of old ReplicaSets to retain",
+      "title": "revisionHistoryLimit",
+      "type": "integer"
+    },
+    "securityContext": {
+      "description": "container-level security context",
+      "properties": {
+        "privileged": {
+          "default": true,
+          "title": "privileged",
+          "type": "boolean"
+        },
+        "readOnlyRootFilesystem": {
+          "default": false,
+          "title": "readOnlyRootFilesystem",
+          "type": "boolean"
+        },
+        "runAsGroup": {
+          "default": 0,
+          "title": "runAsGroup",
+          "type": "integer"
+        },
+        "runAsNonRoot": {
+          "default": false,
+          "title": "runAsNonRoot",
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 0,
+          "title": "runAsUser",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "privileged",
+        "readOnlyRootFilesystem",
+        "runAsGroup",
+        "runAsNonRoot",
+        "runAsUser"
+      ],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "image",
+    "imagePullSecrets",
+    "replicaCount",
+    "revisionHistoryLimit",
+    "podAnnotations",
+    "podSecurityContext",
+    "resources",
+    "securityContext",
+    "serviceAccount",
+    "nodeAccess"
+  ],
+  "type": "object"
+}
