@@ -1,0 +1,29 @@
+apiVersion: v2
+name: netcupscp-exporter
+description: Prometheus Exporter for Netcup Server Control Panel (SCP)
+type: application
+version: 1.4.1
+appVersion: "v0.4.5"
+home: https://github.com/christianhuth/helm-charts
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/netcupscp-exporter/icon.svg
+maintainers:
+  - name: christianhuth
+    email: christian@knell.it
+sources:
+  - https://github.com/mrueg/netcupscp-exporter
+annotations:
+  artifacthub.io/category: monitoring-logging
+  artifacthub.io/changes: |
+    - kind: fixed
+      description: problem in hpa template
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
+  artifacthub.io/screenshots: |
+    - title: Export information about your Servers from Netcup SCP as Prometheus metrics.
+      url: https://www.netcup-wiki.de/images/SCP-Willkommen.png
+    - title: Visualize your data as Grafana dashboard.
+      url: https://raw.githubusercontent.com/mrueg/netcupscp-exporter/main/grafana/dashboard.jpg
+  artifacthub.io/signKey: |
+    fingerprint: REDACTED
+    url: https://charts.christianhuth.de/public.key

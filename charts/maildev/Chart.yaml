@@ -1,0 +1,36 @@
+apiVersion: v2
+name: maildev
+description: MailDev is a simple way to test your emails during development with an easy to use web interface.
+type: application
+version: 1.5.1
+appVersion: "2.2.1"
+home: https://github.com/christianhuth/helm-charts
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/maildev/icon.svg
+maintainers:
+  - name: christianhuth
+    email: christian@knell.it
+sources:
+  - https://maildev.github.io/maildev
+  - https://github.com/maildev/maildev
+  - https://hub.docker.com/r/maildev/maildev
+annotations:
+  artifacthub.io/changes: |
+    - kind: fixed
+      description: problem in hpa template
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
+  artifacthub.io/screenshots: |
+    - title: SMTP server & web interface for viewing and testing emails during development.
+      url: https://maildev.github.io/maildev/assets/img/original/maildev-light.png
+    - title: Resizable viewport to test your emails at different sizes.
+      url: https://maildev.github.io/maildev/assets/img/original/responsive.png
+    - title: View email HTML, plain text, headers or raw source.
+      url: https://maildev.github.io/maildev/assets/img/original/formats.png
+    - title: Convenient search feature to quickly find any email.
+      url: https://maildev.github.io/maildev/assets/img/original/search.png
+    - title: View your emails in an eye-friendly dark interface.
+      url: https://maildev.github.io/maildev/assets/img/original/maildev-dark.png
+  artifacthub.io/signKey: |
+    fingerprint: REDACTED
+    url: https://charts.christianhuth.de/public.key

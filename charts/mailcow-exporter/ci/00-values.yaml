@@ -1,0 +1,5 @@
+config:
+  mailcow:
+    auth:
+      apiKey: REDACTED
+    host: mailcow.example.com

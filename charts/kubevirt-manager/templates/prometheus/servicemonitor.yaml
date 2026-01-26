@@ -1,0 +1,39 @@
+{{- if and .Values.prometheus.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ template "kubevirt-manager.fullname" . }}
+  {{- with .Values.prometheus.namespace }}
+  namespace: {{ . }}
+  {{- end }}
+  labels:
+    {{- include "kubevirt-manager.labels" . | nindent 4 }}
+    {{- with .Values.prometheus.selector }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+    {{- with .Values.prometheus.additionalLabels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  endpoints:
+    - port: http
+      {{- with .Values.prometheus.interval }}
+      interval: {{ . }}
+      {{- end }}
+      path: /metrics
+      {{- with .Values.prometheus.relabelings }}
+      relabelings:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.prometheus.metricRelabelings }}
+      metricRelabelings:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  jobLabel: prometheus.kubevirt.io
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace }}
+  selector:
+    matchLabels:
+      {{- include "kubevirt-manager.selectorLabels" . | nindent 6 }}
+{{- end }}
