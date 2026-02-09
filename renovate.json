@@ -1,0 +1,36 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":disableDependencyDashboard"
+  ],
+  "additionalBranchPrefix": "{{parentDir}}-",
+  "assignees": ["christianhuth"],
+  "bumpVersion": "patch",
+  "labels": ["renovate"],
+  "packageRules": [
+    {
+      "matchManagers": ["helmv3"],
+      "postUpgradeTasks": {
+        "commands": ["bash ./REDACTED.sh '{{{parentDir}}}' '{{{updateType}}}' '{{{depName}}}' '{{{newValue}}}'"],
+        "executionMode": "branch"
+      }
+    },
+    {
+      "matchManagers": ["helm-values"],
+      "postUpgradeTasks": {
+        "commands": ["bash ./renovate-update-chart-values.sh '{{{parentDir}}}' '{{{updateType}}}' '{{{currentValue}}}' '{{{newValue}}}'"],
+        "executionMode": "branch"
+      }
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": false
+    }
+  ],
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 0,
+  "timezone": "Europe/Berlin"
+}

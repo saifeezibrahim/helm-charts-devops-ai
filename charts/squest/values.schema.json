@@ -1,0 +1,1733 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "celery": {
+      "properties": {
+        "beat": {
+          "properties": {
+            "affinity": {
+              "description": "Affinity settings for pod assignment",
+              "required": [],
+              "title": "affinity",
+              "type": "object"
+            },
+            "autoscaling": {
+              "properties": {
+                "enabled": {
+                  "default": false,
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "maxReplicas": {
+                  "default": 100,
+                  "title": "maxReplicas",
+                  "type": "integer"
+                },
+                "minReplicas": {
+                  "default": 1,
+                  "title": "minReplicas",
+                  "type": "integer"
+                },
+                "targetCPUUtilizationPercentage": {
+                  "default": 80,
+                  "title": "targetCPUUtilizationPercentage",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "enabled",
+                "minReplicas",
+                "maxReplicas",
+                "targetCPUUtilizationPercentage"
+              ],
+              "title": "autoscaling",
+              "type": "object"
+            },
+            "config": {
+              "properties": {
+                "django": {
+                  "properties": {
+                    "debug": {
+                      "default": false,
+                      "description": "Django DEBUG mode.",
+                      "title": "debug",
+                      "type": "boolean"
+                    },
+                    "gunicornWorkers": {
+                      "default": 4,
+                      "description": "Number of workers used by Gunicorn process in charge of serving client connection. Increase the number of worker threads to serve more clients concurrently",
+                      "title": "gunicornWorkers",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "debug",
+                    "gunicornWorkers"
+                  ],
+                  "title": "django",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "django"
+              ],
+              "title": "config",
+              "type": "object"
+            },
+            "extraEnv": {
+              "description": "additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list.",
+              "items": {
+                "required": []
+              },
+              "title": "extraEnv",
+              "type": "array"
+            },
+            "extraVolumeMounts": {
+              "description": "additional volumeMounts to be added to the pods",
+              "items": {
+                "required": []
+              },
+              "title": "extraVolumeMounts",
+              "type": "array"
+            },
+            "extraVolumes": {
+              "description": "additional volumes to be added to the pods",
+              "items": {
+                "required": []
+              },
+              "title": "extraVolumes",
+              "type": "array"
+            },
+            "image": {
+              "properties": {
+                "pullPolicy": {
+                  "default": "Always",
+                  "description": "image pull policy",
+                  "title": "pullPolicy",
+                  "type": "string"
+                },
+                "registry": {
+                  "default": "quay.io",
+                  "description": "image registry",
+                  "title": "registry",
+                  "type": "string"
+                },
+                "repository": {
+                  "default": "hewlettpackardenterprise/squest",
+                  "description": "image repository",
+                  "title": "repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "default": "2.8.2",
+                  "description": "Overrides the image tag",
+                  "title": "tag",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "registry",
+                "repository",
+                "pullPolicy",
+                "tag"
+              ],
+              "title": "image",
+              "type": "object"
+            },
+            "nodeSelector": {
+              "description": "Node labels for pod assignment",
+              "required": [],
+              "title": "nodeSelector",
+              "type": "object"
+            },
+            "podAnnotations": {
+              "description": "Annotations to be added to pods",
+              "required": [],
+              "title": "podAnnotations",
+              "type": "object"
+            },
+            "podLabels": {
+              "description": "Labels to be added to pods",
+              "required": [],
+              "title": "podLabels",
+              "type": "object"
+            },
+            "podSecurityContext": {
+              "description": "pod-level security context",
+              "required": [],
+              "title": "podSecurityContext",
+              "type": "object"
+            },
+            "replicaCount": {
+              "default": 1,
+              "description": "Number of replicas",
+              "title": "replicaCount",
+              "type": "integer"
+            },
+            "resources": {
+              "description": "Resource limits and requests for the pods.",
+              "required": [],
+              "title": "resources",
+              "type": "object"
+            },
+            "revisionHistoryLimit": {
+              "default": 10,
+              "description": "The number of old ReplicaSets to retain",
+              "title": "revisionHistoryLimit",
+              "type": "integer"
+            },
+            "securityContext": {
+              "description": "container-level security context",
+              "required": [],
+              "title": "securityContext",
+              "type": "object"
+            },
+            "service": {
+              "properties": {
+                "port": {
+                  "default": 8080,
+                  "description": "Kubernetes port where service is exposed",
+                  "title": "port",
+                  "type": "integer"
+                },
+                "type": {
+                  "default": "ClusterIP",
+                  "description": "Kubernetes service type",
+                  "title": "type",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "port"
+              ],
+              "title": "service",
+              "type": "object"
+            },
+            "serviceAccount": {
+              "properties": {
+                "annotations": {
+                  "description": "Annotations to add to the service account",
+                  "required": [],
+                  "title": "annotations",
+                  "type": "object"
+                },
+                "create": {
+                  "default": true,
+                  "description": "Specifies whether a service account should be created",
+                  "title": "create",
+                  "type": "boolean"
+                },
+                "name": {
+                  "default": "",
+                  "description": "The name of the service account to use\nIf not set and create is true, a name is generated using the fullname template",
+                  "title": "name",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "create",
+                "annotations",
+                "name"
+              ],
+              "title": "serviceAccount",
+              "type": "object"
+            },
+            "tolerations": {
+              "description": "Toleration labels for pod assignment",
+              "items": {
+                "required": []
+              },
+              "title": "tolerations",
+              "type": "array"
+            }
+          },
+          "required": [
+            "image",
+            "replicaCount",
+            "revisionHistoryLimit",
+            "serviceAccount",
+            "podAnnotations",
+            "podLabels",
+            "podSecurityContext",
+            "securityContext",
+            "service",
+            "resources",
+            "autoscaling",
+            "nodeSelector",
+            "tolerations",
+            "affinity",
+            "extraVolumes",
+            "extraVolumeMounts",
+            "extraEnv",
+            "config"
+          ],
+          "title": "beat",
+          "type": "object"
+        },
+        "worker": {
+          "properties": {
+            "affinity": {
+              "description": "Affinity settings for pod assignment",
+              "required": [],
+              "title": "affinity",
+              "type": "object"
+            },
+            "autoscaling": {
+              "properties": {
+                "enabled": {
+                  "default": false,
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "maxReplicas": {
+                  "default": 100,
+                  "title": "maxReplicas",
+                  "type": "integer"
+                },
+                "minReplicas": {
+                  "default": 1,
+                  "title": "minReplicas",
+                  "type": "integer"
+                },
+                "targetCPUUtilizationPercentage": {
+                  "default": 80,
+                  "title": "targetCPUUtilizationPercentage",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "enabled",
+                "minReplicas",
+                "maxReplicas",
+                "targetCPUUtilizationPercentage"
+              ],
+              "title": "autoscaling",
+              "type": "object"
+            },
+            "config": {
+              "properties": {
+                "django": {
+                  "properties": {
+                    "debug": {
+                      "default": false,
+                      "description": "Django DEBUG mode.",
+                      "title": "debug",
+                      "type": "boolean"
+                    },
+                    "gunicornWorkers": {
+                      "default": 4,
+                      "description": "Number of workers used by Gunicorn process in charge of serving client connection. Increase the number of worker threads to serve more clients concurrently",
+                      "title": "gunicornWorkers",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "debug",
+                    "gunicornWorkers"
+                  ],
+                  "title": "django",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "django"
+              ],
+              "title": "config",
+              "type": "object"
+            },
+            "extraEnv": {
+              "description": "additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list.",
+              "items": {
+                "required": []
+              },
+              "title": "extraEnv",
+              "type": "array"
+            },
+            "extraVolumeMounts": {
+              "description": "additional volumeMounts to be added to the pods",
+              "items": {
+                "required": []
+              },
+              "title": "extraVolumeMounts",
+              "type": "array"
+            },
+            "extraVolumes": {
+              "description": "additional volumes to be added to the pods",
+              "items": {
+                "required": []
+              },
+              "title": "extraVolumes",
+              "type": "array"
+            },
+            "image": {
+              "properties": {
+                "pullPolicy": {
+                  "default": "Always",
+                  "description": "image pull policy",
+                  "title": "pullPolicy",
+                  "type": "string"
+                },
+                "registry": {
+                  "default": "quay.io",
+                  "description": "image registry",
+                  "title": "registry",
+                  "type": "string"
+                },
+                "repository": {
+                  "default": "hewlettpackardenterprise/squest",
+                  "description": "image repository",
+                  "title": "repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "default": "2.8.2",
+                  "description": "Overrides the image tag",
+                  "title": "tag",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "registry",
+                "repository",
+                "pullPolicy",
+                "tag"
+              ],
+              "title": "image",
+              "type": "object"
+            },
+            "nodeSelector": {
+              "description": "Node labels for pod assignment",
+              "required": [],
+              "title": "nodeSelector",
+              "type": "object"
+            },
+            "podAnnotations": {
+              "description": "Annotations to be added to pods",
+              "required": [],
+              "title": "podAnnotations",
+              "type": "object"
+            },
+            "podLabels": {
+              "description": "Labels to be added to pods",
+              "required": [],
+              "title": "podLabels",
+              "type": "object"
+            },
+            "podSecurityContext": {
+              "description": "pod-level security context",
+              "required": [],
+              "title": "podSecurityContext",
+              "type": "object"
+            },
+            "replicaCount": {
+              "default": 1,
+              "description": "Number of replicas",
+              "title": "replicaCount",
+              "type": "integer"
+            },
+            "resources": {
+              "description": "Resource limits and requests for the pods.",
+              "required": [],
+              "title": "resources",
+              "type": "object"
+            },
+            "revisionHistoryLimit": {
+              "default": 10,
+              "description": "The number of old ReplicaSets to retain",
+              "title": "revisionHistoryLimit",
+              "type": "integer"
+            },
+            "securityContext": {
+              "description": "container-level security context",
+              "required": [],
+              "title": "securityContext",
+              "type": "object"
+            },
+            "service": {
+              "properties": {
+                "port": {
+                  "default": 8080,
+                  "description": "Kubernetes port where service is exposed",
+                  "title": "port",
+                  "type": "integer"
+                },
+                "type": {
+                  "default": "ClusterIP",
+                  "description": "Kubernetes service type",
+                  "title": "type",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "port"
+              ],
+              "title": "service",
+              "type": "object"
+            },
+            "serviceAccount": {
+              "properties": {
+                "annotations": {
+                  "description": "Annotations to add to the service account",
+                  "required": [],
+                  "title": "annotations",
+                  "type": "object"
+                },
+                "create": {
+                  "default": true,
+                  "description": "Specifies whether a service account should be created",
+                  "title": "create",
+                  "type": "boolean"
+                },
+                "name": {
+                  "default": "",
+                  "description": "The name of the service account to use\nIf not set and create is true, a name is generated using the fullname template",
+                  "title": "name",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "create",
+                "annotations",
+                "name"
+              ],
+              "title": "serviceAccount",
+              "type": "object"
+            },
+            "tolerations": {
+              "description": "Toleration labels for pod assignment",
+              "items": {
+                "required": []
+              },
+              "title": "tolerations",
+              "type": "array"
+            }
+          },
+          "required": [
+            "image",
+            "replicaCount",
+            "revisionHistoryLimit",
+            "serviceAccount",
+            "podAnnotations",
+            "podLabels",
+            "podSecurityContext",
+            "securityContext",
+            "service",
+            "resources",
+            "autoscaling",
+            "nodeSelector",
+            "tolerations",
+            "affinity",
+            "extraVolumes",
+            "extraVolumeMounts",
+            "extraEnv",
+            "config"
+          ],
+          "title": "worker",
+          "type": "object"
+        }
+      },
+      "required": [
+        "beat",
+        "worker"
+      ],
+      "title": "celery",
+      "type": "object"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"squest.fullname\"`",
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+      "items": {
+        "required": []
+      },
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "mariadb": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "database": {
+              "default": "squest",
+              "description": "The database name to be used when using the integrated MariaDB database.",
+              "title": "database",
+              "type": "string"
+            },
+            "password": {
+              "default": "squest",
+              "description": "The password credential to be used when using the integrated MariaDB database.",
+              "title": "password",
+              "type": "string"
+            },
+            "rootPassword": {
+              "default": "squest",
+              "description": "The root password credential to be used when using the integrated MariaDB database.",
+              "title": "rootPassword",
+              "type": "string"
+            },
+            "username": {
+              "default": "squest",
+              "description": "The username credential to be used when using the integrated MariaDB database.",
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "database",
+            "password",
+            "rootPassword",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "description": "enable integrated MariaDB™ subchart from Bitnami",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "image": {
+          "properties": {
+            "repository": {
+              "default": "bitnamilegacy/mariadb",
+              "description": "image repository for the MariaDB™ subchart from Bitnami",
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "12.0.2-debian-12-r0",
+              "description": "image tag for the MariaDB™ subchart from Bitnami",
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "auth",
+        "image"
+      ],
+      "title": "mariadb",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `squest`",
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "rabbitmq": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "erlangCookie": {
+              "default": "abcdefghijklmnopqrstuvwxyz",
+              "description": "The Erlang cookie to determine whether different nodes are allowed to communicate with each other",
+              "title": "erlangCookie",
+              "type": "string"
+            },
+            "password": {
+              "default": "squest",
+              "description": "The password credential to be used when using the integrated RabbitMQ.",
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "squest",
+              "description": "The username credential to be used when using the integrated RabbitMQ.",
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "password",
+            "username",
+            "erlangCookie"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "description": "enable integrated RabbitMQ™ subchart from Bitnami",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "image": {
+          "properties": {
+            "repository": {
+              "default": "bitnamilegacy/rabbitmq",
+              "description": "image repository for the RabbitMQ™ subchart from Bitnami",
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "4.1.3-debian-12-r1",
+              "description": "image tag for the RabbitMQ™ subchart from Bitnami",
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "auth",
+        "image"
+      ],
+      "title": "rabbitmq",
+      "type": "object"
+    },
+    "redis": {
+      "properties": {
+        "architecture": {
+          "default": "standalone",
+          "description": "Redis™ architecture. Allowed values: `standalone` or `replication`",
+          "title": "architecture",
+          "type": "string"
+        },
+        "auth": {
+          "properties": {
+            "enabled": {
+              "default": true,
+              "description": "Enable password authentication",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "password": {
+              "default": "squest",
+              "description": "The password credential to be used when using the integrated Redis.",
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "squest",
+              "description": "The username credential to be used when using the integrated Redis.",
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "enabled",
+            "password",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "description": "enable integrated Redis™ subchart from Bitnami",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "image": {
+          "properties": {
+            "repository": {
+              "default": "bitnamilegacy/redis",
+              "description": "image repository for the Redis™ subchart from Bitnami",
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "8.2.1-debian-12-r0",
+              "description": "image tag for the Redis™ subchart from Bitnami",
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "architecture",
+        "auth",
+        "image"
+      ],
+      "title": "redis",
+      "type": "object"
+    },
+    "squest": {
+      "properties": {
+        "affinity": {
+          "description": "Affinity settings for pod assignment",
+          "required": [],
+          "title": "affinity",
+          "type": "object"
+        },
+        "autoscaling": {
+          "properties": {
+            "enabled": {
+              "default": false,
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "maxReplicas": {
+              "default": 100,
+              "title": "maxReplicas",
+              "type": "integer"
+            },
+            "minReplicas": {
+              "default": 1,
+              "title": "minReplicas",
+              "type": "integer"
+            },
+            "targetCPUUtilizationPercentage": {
+              "default": 80,
+              "title": "targetCPUUtilizationPercentage",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "minReplicas",
+            "maxReplicas",
+            "targetCPUUtilizationPercentage"
+          ],
+          "title": "autoscaling",
+          "type": "object"
+        },
+        "config": {
+          "properties": {
+            "database": {
+              "properties": {
+                "auth": {
+                  "properties": {
+                    "database": {
+                      "default": "",
+                      "description": "The database name to be used when using an external MariaDB database. Will be ignored when you activate the integrated database with mariadb.enabled.",
+                      "title": "database",
+                      "type": "string"
+                    },
+                    "existingSecret": {
+                      "default": "",
+                      "description": "Use existing secret for password details (`squest.config.database.auth.password` and `squest.config.database.auth.rootPassword` will be ignored and picked up from this secret). The secret has to contain the keys `mariadb-password` and `mariadb-root-password`.",
+                      "title": "existingSecret",
+                      "type": "string"
+                    },
+                    "password": {
+                      "default": "",
+                      "description": "The password credential to be used when using an external MariaDB database.",
+                      "title": "password",
+                      "type": "string"
+                    },
+                    "rootPassword": {
+                      "default": "",
+                      "description": "The root password credential to be used when using an external MariaDB database.",
+                      "title": "rootPassword",
+                      "type": "string"
+                    },
+                    "username": {
+                      "default": "",
+                      "description": "The username credential to be used when using an external MariaDB database.",
+                      "title": "username",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "database",
+                    "existingSecret",
+                    "password",
+                    "rootPassword",
+                    "username"
+                  ],
+                  "title": "auth",
+                  "type": "object"
+                },
+                "host": {
+                  "default": "",
+                  "description": "The host name of the database server when using an external MariaDB database. Will be ignored when you activate the integrated database with mariadb.enabled.",
+                  "title": "host",
+                  "type": "string"
+                },
+                "port": {
+                  "default": 3306,
+                  "description": "The port in which the database service is running when using an external MariaDB database. Will be ignored when you activate the integrated database with mariadb.enabled.",
+                  "title": "port",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "auth",
+                "host",
+                "port"
+              ],
+              "title": "database",
+              "type": "object"
+            },
+            "django": {
+              "properties": {
+                "debug": {
+                  "default": false,
+                  "description": "Django DEBUG mode.",
+                  "title": "debug",
+                  "type": "boolean"
+                },
+                "gunicornWorkers": {
+                  "default": 4,
+                  "description": "Number of workers used by Gunicorn process in charge of serving client connection. Increase the number of worker threads to serve more clients concurrently",
+                  "title": "gunicornWorkers",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "debug",
+                "gunicornWorkers"
+              ],
+              "title": "django",
+              "type": "object"
+            },
+            "localization": {
+              "properties": {
+                "dateFormat": {
+                  "default": "%d %b, %Y %H:%M",
+                  "description": "Change the format of all date in Squest UI. Based on Python strftime. See https://strftime.org for a strftime cheatsheet.",
+                  "title": "dateFormat",
+                  "type": "string"
+                },
+                "language": {
+                  "default": "en-us",
+                  "description": "Django language. See https://docs.djangoproject.com/en/4.2/ref/settings/#language-code for details.",
+                  "title": "language",
+                  "type": "string"
+                },
+                "timezone": {
+                  "default": "Europe/Berlin",
+                  "description": "Time zone of the server that host Squest service. See https://docs.djangoproject.com/en/4.2/ref/settings/#std:setting-TIME_ZONE for details.",
+                  "title": "timezone",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "dateFormat",
+                "language",
+                "timezone"
+              ],
+              "title": "localization",
+              "type": "object"
+            },
+            "plugins": {
+              "properties": {
+                "fieldValidatorPath": {
+                  "default": "",
+                  "description": "Path to form field validation modules. It is deprecated. Please use squest.config.plugins.surveyValidatorPath instead.",
+                  "title": "fieldValidatorPath",
+                  "type": "string"
+                },
+                "surveyValidatorPath": {
+                  "default": "plugins/survey_validators",
+                  "description": "Path to SurveyValidator modules.",
+                  "title": "surveyValidatorPath",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "fieldValidatorPath",
+                "surveyValidatorPath"
+              ],
+              "title": "plugins",
+              "type": "object"
+            },
+            "rabbitmq": {
+              "properties": {
+                "auth": {
+                  "properties": {
+                    "existingSecret": {
+                      "default": "",
+                      "description": "Use existing secret for password details (`squest.config.rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`.",
+                      "title": "existingSecret",
+                      "type": "string"
+                    },
+                    "password": {
+                      "default": "",
+                      "description": "The password credential to be used when using an external database driver.",
+                      "title": "password",
+                      "type": "string"
+                    },
+                    "username": {
+                      "default": "",
+                      "description": "The username credential to be used when using an external database driver.",
+                      "title": "username",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "existingSecret",
+                    "password",
+                    "username"
+                  ],
+                  "title": "auth",
+                  "type": "object"
+                },
+                "host": {
+                  "default": "",
+                  "description": "The RabbitMQ server host name",
+                  "title": "host",
+                  "type": "string"
+                },
+                "vhost": {
+                  "default": "",
+                  "description": "The RabbitMQ server VHost",
+                  "title": "vhost",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "auth",
+                "host",
+                "vhost"
+              ],
+              "title": "rabbitmq",
+              "type": "object"
+            },
+            "redis": {
+              "properties": {
+                "auth": {
+                  "properties": {
+                    "existingSecret": {
+                      "default": "",
+                      "description": "Use existing secret for password details (`squest.config.redis.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `redis-password`.",
+                      "title": "existingSecret",
+                      "type": "string"
+                    },
+                    "password": {
+                      "default": "",
+                      "description": "The password credential to be used when using an external redis server.",
+                      "title": "password",
+                      "type": "string"
+                    },
+                    "username": {
+                      "default": "",
+                      "description": "The username credential to be used when using an external redis server.",
+                      "title": "username",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "existingSecret",
+                    "password",
+                    "username"
+                  ],
+                  "title": "auth",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "auth"
+              ],
+              "title": "redis",
+              "type": "object"
+            },
+            "smtp": {
+              "properties": {
+                "auth": {
+                  "properties": {
+                    "existingSecret": {
+                      "default": "",
+                      "description": "Use existing secret for password details (`squest.config.smtp.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `smtp-password`.",
+                      "title": "existingSecret",
+                      "type": "string"
+                    },
+                    "password": {
+                      "default": "",
+                      "description": "The password credential to be used when using an external SMTP host.",
+                      "title": "password",
+                      "type": "string"
+                    },
+                    "username": {
+                      "default": "",
+                      "description": "The username credential to be used when using an external SMTP host.",
+                      "title": "username",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "existingSecret",
+                    "password",
+                    "username"
+                  ],
+                  "title": "auth",
+                  "type": "object"
+                },
+                "from": {
+                  "default": "squest@squest.domain.local",
+                  "description": "Domain name used as email sender.",
+                  "title": "from",
+                  "type": "string"
+                },
+                "host": {
+                  "default": "localhost",
+                  "description": "The SMTP host to use for sending email.",
+                  "title": "host",
+                  "type": "string"
+                },
+                "port": {
+                  "default": 25,
+                  "description": "Port to use for the SMTP server defined in squest.config.email.host.",
+                  "title": "port",
+                  "type": "integer"
+                },
+                "useSsl": {
+                  "default": false,
+                  "description": "Whether to use an implicit TLS (secure) connection when talking to the SMTP server defined in squest.config.smtp.host.",
+                  "title": "useSsl",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "auth",
+                "from",
+                "host",
+                "port",
+                "useSsl"
+              ],
+              "title": "smtp",
+              "type": "object"
+            },
+            "squest": {
+              "properties": {
+                "admins": {
+                  "default": "",
+                  "description": "A list of all the email who get code error notifications when squest.config.django.debug=false",
+                  "title": "admins",
+                  "type": "string"
+                },
+                "emailNotificationEnabled": {
+                  "default": "",
+                  "description": "Set to True to enable email notifications. The default is based on the squest.config.django.debug value.",
+                  "title": "emailNotificationEnabled",
+                  "type": "string"
+                },
+                "host": {
+                  "default": "http://squest.domain.local",
+                  "description": "Address of the Squest portal instance. Used in email templates and in metadata sent to Red Hat Ansible Automation Platform/AWX job templates.",
+                  "title": "host",
+                  "type": "string"
+                },
+                "isDevServer": {
+                  "default": false,
+                  "description": "Set to True to change the navbar and footer color to visually identify a testing instance of Squest.",
+                  "title": "isDevServer",
+                  "type": "boolean"
+                },
+                "maintenanceModeEnabled": {
+                  "default": false,
+                  "description": "When enabled, only administrators can access squest UI and API. This can be used for example to block new requests by end users from the service catalog. So an administrator can perform operations against the API like migrating instance specs.",
+                  "title": "maintenanceModeEnabled",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "admins",
+                "emailNotificationEnabled",
+                "host",
+                "isDevServer",
+                "maintenanceModeEnabled"
+              ],
+              "title": "squest",
+              "type": "object"
+            }
+          },
+          "required": [
+            "database",
+            "django",
+            "localization",
+            "plugins",
+            "rabbitmq",
+            "redis",
+            "smtp",
+            "squest"
+          ],
+          "title": "config",
+          "type": "object"
+        },
+        "extraEnv": {
+          "description": "additional environment variables to be added to the squest container. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list of available environment variables.",
+          "items": {
+            "required": []
+          },
+          "title": "extraEnv",
+          "type": "array"
+        },
+        "extraEnvFrom": {
+          "description": "load additional environment variables in the squest container from configMaps or secrets. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list of available environment variables.",
+          "items": {
+            "required": []
+          },
+          "title": "extraEnvFrom",
+          "type": "array"
+        },
+        "extraVolumeMounts": {
+          "description": "additional volumeMounts to be added to the squest container (nginx and init container have separate extraVolumeMounts)",
+          "items": {
+            "required": []
+          },
+          "title": "extraVolumeMounts",
+          "type": "array"
+        },
+        "extraVolumes": {
+          "description": "additional volumes to be added to the squest pods",
+          "items": {
+            "required": []
+          },
+          "title": "extraVolumes",
+          "type": "array"
+        },
+        "image": {
+          "properties": {
+            "pullPolicy": {
+              "default": "Always",
+              "description": "image pull policy",
+              "title": "pullPolicy",
+              "type": "string"
+            },
+            "registry": {
+              "default": "quay.io",
+              "description": "image registry",
+              "title": "registry",
+              "type": "string"
+            },
+            "repository": {
+              "default": "hewlettpackardenterprise/squest",
+              "description": "image repository",
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "2.8.2",
+              "description": "Overrides the image tag",
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "registry",
+            "repository",
+            "pullPolicy",
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
+        },
+        "ingress": {
+          "properties": {
+            "annotations": {
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "className": {
+              "default": "",
+              "title": "className",
+              "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "hosts": {
+              "description": "kubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"",
+              "items": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "host": {
+                        "default": "chart-example.local",
+                        "title": "host",
+                        "type": "string"
+                      },
+                      "paths": {
+                        "items": {
+                          "anyOf": [
+                            {
+                              "properties": {
+                                "path": {
+                                  "default": "/",
+                                  "title": "path",
+                                  "type": "string"
+                                },
+                                "pathType": {
+                                  "default": "ImplementationSpecific",
+                                  "title": "pathType",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "pathType"
+                              ],
+                              "type": "object"
+                            }
+                          ],
+                          "required": []
+                        },
+                        "title": "paths",
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "host",
+                      "paths"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "required": []
+              },
+              "title": "hosts",
+              "type": "array"
+            },
+            "tls": {
+              "items": {
+                "required": []
+              },
+              "title": "tls",
+              "type": "array"
+            }
+          },
+          "required": [
+            "enabled",
+            "className",
+            "annotations",
+            "hosts",
+            "tls"
+          ],
+          "title": "ingress",
+          "type": "object"
+        },
+        "init": {
+          "properties": {
+            "extraEnv": {
+              "description": "additional environment variables to be added to the init container.",
+              "items": {
+                "required": []
+              },
+              "title": "extraEnv",
+              "type": "array"
+            },
+            "extraEnvFrom": {
+              "description": "load additional environment variables in the init container from configMaps or secrets.",
+              "items": {
+                "required": []
+              },
+              "title": "extraEnvFrom",
+              "type": "array"
+            },
+            "extraVolumeMounts": {
+              "description": "additional volumeMounts to be added to the init container",
+              "items": {
+                "required": []
+              },
+              "title": "extraVolumeMounts",
+              "type": "array"
+            }
+          },
+          "required": [
+            "extraEnv",
+            "extraEnvFrom",
+            "extraVolumeMounts"
+          ],
+          "title": "init",
+          "type": "object"
+        },
+        "nginx": {
+          "properties": {
+            "extraEnv": {
+              "description": "additional environment variables to be added to the nginx container.",
+              "items": {
+                "required": []
+              },
+              "title": "extraEnv",
+              "type": "array"
+            },
+            "extraEnvFrom": {
+              "description": "load additional environment variables in the nginx container from configMaps or secrets.",
+              "items": {
+                "required": []
+              },
+              "title": "extraEnvFrom",
+              "type": "array"
+            },
+            "extraVolumeMounts": {
+              "description": "additional volumeMounts to be added to the nginx container",
+              "items": {
+                "required": []
+              },
+              "title": "extraVolumeMounts",
+              "type": "array"
+            },
+            "image": {
+              "properties": {
+                "pullPolicy": {
+                  "default": "Always",
+                  "description": "image pull policy",
+                  "title": "pullPolicy",
+                  "type": "string"
+                },
+                "registry": {
+                  "default": "docker.io",
+                  "description": "image registry",
+                  "title": "registry",
+                  "type": "string"
+                },
+                "repository": {
+                  "default": "nginx",
+                  "description": "image repository",
+                  "title": "repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "default": "1.29.5-alpine",
+                  "description": "Overrides the image tag",
+                  "title": "tag",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "registry",
+                "repository",
+                "pullPolicy",
+                "tag"
+              ],
+              "title": "image",
+              "type": "object"
+            }
+          },
+          "required": [
+            "image",
+            "extraEnv",
+            "extraEnvFrom",
+            "extraVolumeMounts"
+          ],
+          "title": "nginx",
+          "type": "object"
+        },
+        "nodeSelector": {
+          "description": "Node labels for pod assignment",
+          "required": [],
+          "title": "nodeSelector",
+          "type": "object"
+        },
+        "podAnnotations": {
+          "description": "Annotations to be added to pods",
+          "required": [],
+          "title": "podAnnotations",
+          "type": "object"
+        },
+        "podLabels": {
+          "description": "Labels to be added to pods",
+          "required": [],
+          "title": "podLabels",
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "description": "pod-level security context",
+          "properties": {
+            "fsGroup": {
+              "default": "999",
+              "required": [],
+              "title": "fsGroup"
+            }
+          },
+          "required": [],
+          "title": "podSecurityContext"
+        },
+        "replicaCount": {
+          "default": 1,
+          "description": "Number of replicas",
+          "title": "replicaCount",
+          "type": "integer"
+        },
+        "resources": {
+          "description": "Resource limits and requests for the pods.",
+          "required": [],
+          "title": "resources",
+          "type": "object"
+        },
+        "revisionHistoryLimit": {
+          "default": 10,
+          "description": "The number of old ReplicaSets to retain",
+          "title": "revisionHistoryLimit",
+          "type": "integer"
+        },
+        "route": {
+          "description": "BETA: Configure the gateway routes for the chart here.\nMore routes can be added by adding a dictionary key like the 'main' route.\nBeing BETA this can/will change in the future without notice, do not use unless you want to take that risk\n[[ref]](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io%2fv1alpha2)",
+          "properties": {
+            "main": {
+              "properties": {
+                "additionalRules": {
+                  "description": "Additional custom rules that can be added to the route",
+                  "items": {
+                    "required": []
+                  },
+                  "title": "additionalRules",
+                  "type": "array"
+                },
+                "annotations": {
+                  "description": "Add annotations to the route",
+                  "required": [],
+                  "title": "annotations",
+                  "type": "object"
+                },
+                "apiVersion": {
+                  "default": "gateway.networking.k8s.io/v1",
+                  "description": "Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2",
+                  "title": "apiVersion",
+                  "type": "string"
+                },
+                "enabled": {
+                  "default": false,
+                  "description": "Enables or disables the route",
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "filters": {
+                  "description": "Filters define the filters that are applied to requests that match this rule.",
+                  "items": {
+                    "required": []
+                  },
+                  "title": "filters",
+                  "type": "array"
+                },
+                "hostnames": {
+                  "description": "Hostnames to be matched",
+                  "items": {
+                    "required": []
+                  },
+                  "title": "hostnames",
+                  "type": "array"
+                },
+                "httpsRedirect": {
+                  "default": false,
+                  "description": "adds a filter for redirecting to https (HTTP 301 Moved Permanently). To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners. Matches and filters do not take effect if enabled. Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/",
+                  "title": "httpsRedirect",
+                  "type": "boolean"
+                },
+                "kind": {
+                  "default": "HTTPRoute",
+                  "description": "Set the route kind\nValid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute",
+                  "title": "kind",
+                  "type": "string"
+                },
+                "labels": {
+                  "description": "Add labels to the route",
+                  "required": [],
+                  "title": "labels",
+                  "type": "object"
+                },
+                "matches": {
+                  "description": "define conditions used for matching the rule against incoming HTTP requests.",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "path": {
+                            "properties": {
+                              "type": {
+                                "default": "PathPrefix",
+                                "title": "type",
+                                "type": "string"
+                              },
+                              "value": {
+                                "default": "/",
+                                "title": "value",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "value"
+                            ],
+                            "title": "path",
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "path"
+                        ],
+                        "type": "object"
+                      }
+                    ],
+                    "required": []
+                  },
+                  "title": "matches",
+                  "type": "array"
+                },
+                "parentRefs": {
+                  "description": "Parent references (Gateway)",
+                  "items": {
+                    "required": []
+                  },
+                  "title": "parentRefs",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "enabled",
+                "apiVersion",
+                "kind",
+                "annotations",
+                "labels",
+                "hostnames",
+                "parentRefs",
+                "matches",
+                "filters",
+                "additionalRules",
+                "httpsRedirect"
+              ],
+              "title": "main",
+              "type": "object"
+            }
+          },
+          "required": [
+            "main"
+          ],
+          "title": "route",
+          "type": "object"
+        },
+        "securityContext": {
+          "description": "container-level security context",
+          "required": [],
+          "title": "securityContext",
+          "type": "object"
+        },
+        "service": {
+          "properties": {
+            "port": {
+              "default": 8080,
+              "description": "Kubernetes port where service is exposed",
+              "title": "port",
+              "type": "integer"
+            },
+            "type": {
+              "default": "ClusterIP",
+              "description": "Kubernetes service type",
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "port"
+          ],
+          "title": "service",
+          "type": "object"
+        },
+        "serviceAccount": {
+          "properties": {
+            "annotations": {
+              "description": "Annotations to add to the service account",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "create": {
+              "default": true,
+              "description": "Specifies whether a service account should be created",
+              "title": "create",
+              "type": "boolean"
+            },
+            "name": {
+              "default": "",
+              "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+              "title": "name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "create",
+            "annotations",
+            "name"
+          ],
+          "title": "serviceAccount",
+          "type": "object"
+        },
+        "strategy": {
+          "default": "Recreate",
+          "description": "Upgrade strategy For Deployments, valid values are Recreate (default) and RollingUpdate",
+          "title": "strategy",
+          "type": "string"
+        },
+        "tolerations": {
+          "description": "Toleration labels for pod assignment",
+          "items": {
+            "required": []
+          },
+          "title": "tolerations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "image",
+        "strategy",
+        "replicaCount",
+        "revisionHistoryLimit",
+        "serviceAccount",
+        "podAnnotations",
+        "podLabels",
+        "securityContext",
+        "service",
+        "ingress",
+        "route",
+        "resources",
+        "autoscaling",
+        "nodeSelector",
+        "tolerations",
+        "affinity",
+        "extraVolumes",
+        "extraVolumeMounts",
+        "extraEnv",
+        "extraEnvFrom",
+        "config",
+        "nginx",
+        "init"
+      ],
+      "title": "squest",
+      "type": "object"
+    }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "imagePullSecrets",
+    "squest",
+    "celery",
+    "mariadb",
+    "rabbitmq",
+    "redis"
+  ],
+  "type": "object"
+}

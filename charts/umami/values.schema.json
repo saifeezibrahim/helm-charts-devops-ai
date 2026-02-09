@@ -1,0 +1,1083 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "affinity": {
+      "description": "Affinity settings for pod assignment",
+      "required": [],
+      "title": "affinity",
+      "type": "object"
+    },
+    "autoscaling": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable Horizontal POD autoscaling",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "maxReplicas": {
+          "default": 100,
+          "description": "Maximum number of replicas",
+          "title": "maxReplicas",
+          "type": "integer"
+        },
+        "minReplicas": {
+          "default": 1,
+          "description": "Minimum number of replicas",
+          "title": "minReplicas",
+          "type": "integer"
+        },
+        "targetCPUUtilizationPercentage": {
+          "default": 80,
+          "description": "Target CPU utilization percentage",
+          "title": "targetCPUUtilizationPercentage",
+          "type": "integer"
+        },
+        "REDACTED": {
+          "default": 80,
+          "description": "Target Memory utilization percentage",
+          "title": "REDACTED",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "enabled",
+        "minReplicas",
+        "maxReplicas",
+        "targetCPUUtilizationPercentage",
+        "REDACTED"
+      ],
+      "title": "autoscaling",
+      "type": "object"
+    },
+    "database": {
+      "properties": {
+        "databaseUrlKey": {
+          "default": "",
+          "description": "Key in the existing secret containing the database url",
+          "title": "databaseUrlKey",
+          "type": "string"
+        },
+        "existingSecret": {
+          "default": "",
+          "description": "use an existing secret containing the database url. If none given, we will generate the database url by using the other values. The password for the database has to be set using `.Values.postgresql.auth.password`, `.Values.mysql.auth.password` or `.Values.externalDatabase.auth.password`.",
+          "title": "existingSecret",
+          "type": "string"
+        }
+      },
+      "required": [
+        "databaseUrlKey",
+        "existingSecret"
+      ],
+      "title": "database",
+      "type": "object"
+    },
+    "externalDatabase": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "database": {
+              "default": "mychart",
+              "description": "Name of the database to use",
+              "title": "database",
+              "type": "string"
+            },
+            "password": {
+              "default": "mychart",
+              "description": "Password to use",
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "mychart",
+              "description": "Name of the user to use",
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "database",
+            "password",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "hostname": {
+          "default": "",
+          "description": "Hostname of the database",
+          "title": "hostname",
+          "type": "string"
+        },
+        "port": {
+          "default": 5432,
+          "description": "Port used to connect to database",
+          "title": "port",
+          "type": "integer"
+        },
+        "type": {
+          "default": "postgresql",
+          "description": "Type of database",
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "auth",
+        "hostname",
+        "port",
+        "type"
+      ],
+      "title": "externalDatabase",
+      "type": "object"
+    },
+    "extraEnv": {
+      "description": "additional environment variables to be added to the pods. See https://umami.is/docs/environment-variables for a complete list of available variables. Most variables can be set under umami as well.",
+      "items": {
+        "required": []
+      },
+      "title": "extraEnv",
+      "type": "array"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"umami.fullname\"`",
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "properties": {
+        "pullPolicy": {
+          "default": "Always",
+          "description": "image pull policy",
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "registry": {
+          "default": "ghcr.io",
+          "description": "image registry",
+          "title": "registry",
+          "type": "string"
+        },
+        "repository": {
+          "default": "umami-software/umami",
+          "description": "image repository",
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "postgresql-v2.20.1",
+          "description": "Overrides the image tag",
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "registry",
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+      "items": {
+        "required": []
+      },
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "ingress": {
+      "properties": {
+        "annotations": {
+          "description": "Additional annotations for the Ingress resource",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "className": {
+          "default": "",
+          "description": "IngressClass that will be be used to implement the Ingress",
+          "title": "className",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "description": "Enable ingress record generation",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "hosts": {
+          "description": "cert-manager.io/cluster-issuer: cluster-issuer-name\nkubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"\nAn array with hosts and paths",
+          "items": {
+            "anyOf": [
+              {
+                "properties": {
+                  "host": {
+                    "default": "chart-example.local",
+                    "title": "host",
+                    "type": "string"
+                  },
+                  "paths": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "properties": {
+                            "path": {
+                              "default": "/",
+                              "title": "path",
+                              "type": "string"
+                            },
+                            "pathType": {
+                              "default": "ImplementationSpecific",
+                              "title": "pathType",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "pathType"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "title": "paths",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "host",
+                  "paths"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "title": "hosts",
+          "type": "array"
+        },
+        "tls": {
+          "description": "An array with the tls configuration",
+          "items": {
+            "required": []
+          },
+          "title": "tls",
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "className",
+        "annotations",
+        "hosts",
+        "tls"
+      ],
+      "title": "ingress",
+      "type": "object"
+    },
+    "initContainers": {
+      "description": "define additional init containers",
+      "required": [],
+      "title": "initContainers",
+      "type": "object"
+    },
+    "livenessProbe": {
+      "properties": {
+        "failureThreshold": {
+          "default": 3,
+          "description": "Failure threshold for livenessProbe",
+          "title": "failureThreshold",
+          "type": "integer"
+        },
+        "httpGet": {
+          "properties": {
+            "path": {
+              "default": "/",
+              "description": "Path for livenessProbe",
+              "title": "path",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "title": "httpGet",
+          "type": "object"
+        },
+        "initialDelaySeconds": {
+          "default": 15,
+          "description": "Initial delay seconds for livenessProbe",
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "periodSeconds": {
+          "default": 10,
+          "description": "Period seconds for livenessProbe",
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "default": 1,
+          "description": "Success threshold for livenessProbe",
+          "title": "successThreshold",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 1,
+          "description": "Timeout seconds for livenessProbe",
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "failureThreshold",
+        "httpGet",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "successThreshold",
+        "timeoutSeconds"
+      ],
+      "title": "livenessProbe",
+      "type": "object"
+    },
+    "mysql": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "database": {
+              "default": "mychart",
+              "description": "Name for a custom database to create",
+              "title": "database",
+              "type": "string"
+            },
+            "password": {
+              "default": "mychart",
+              "description": "Password for the custom user to create",
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "mychart",
+              "description": "Name for a custom user to create",
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "database",
+            "password",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "description": "enable MySQL™ subchart from Bitnami",
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "auth"
+      ],
+      "title": "mysql",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `umami`",
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "nodeSelector": {
+      "description": "Node labels for pod assignment",
+      "required": [],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "description": "Annotations to be added to pods",
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podLabels": {
+      "description": "Labels to be added to pods",
+      "required": [],
+      "title": "podLabels",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "description": "pod-level security context",
+      "required": [],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "postgresql": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "database": {
+              "default": "mychart",
+              "description": "Name for a custom database to create",
+              "title": "database",
+              "type": "string"
+            },
+            "password": {
+              "default": "mychart",
+              "description": "Password for the custom user to create",
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "mychart",
+              "description": "Name for a custom user to create",
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "database",
+            "password",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "description": "enable PostgreSQL™ subchart from Bitnami",
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "auth"
+      ],
+      "title": "postgresql",
+      "type": "object"
+    },
+    "readinessProbe": {
+      "properties": {
+        "failureThreshold": {
+          "default": 3,
+          "description": "Failure threshold for readinessProbe",
+          "title": "failureThreshold",
+          "type": "integer"
+        },
+        "httpGet": {
+          "properties": {
+            "path": {
+              "default": "/",
+              "description": "Path for readinessProbe",
+              "title": "path",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "title": "httpGet",
+          "type": "object"
+        },
+        "initialDelaySeconds": {
+          "default": 15,
+          "description": "Initial delay seconds for readinessProbe",
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "periodSeconds": {
+          "default": 10,
+          "description": "Period seconds for readinessProbe",
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "default": 1,
+          "description": "Success threshold for readinessProbe",
+          "title": "successThreshold",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 1,
+          "description": "Timeout seconds for readinessProbe",
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "failureThreshold",
+        "httpGet",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "successThreshold",
+        "timeoutSeconds"
+      ],
+      "title": "readinessProbe",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "description": "Number of replicas",
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "description": "Resource limits and requests for the controller pods.",
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "revisionHistoryLimit": {
+      "default": 10,
+      "description": "The number of old ReplicaSets to retain",
+      "title": "revisionHistoryLimit",
+      "type": "integer"
+    },
+    "route": {
+      "description": "BETA: Configure the gateway routes for the chart here.\nMore routes can be added by adding a dictionary key like the 'main' route.\nBeing BETA this can/will change in the future without notice, do not use unless you want to take that risk\n[[ref]](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io%2fv1alpha2)",
+      "properties": {
+        "main": {
+          "properties": {
+            "additionalRules": {
+              "description": "Additional custom rules that can be added to the route",
+              "items": {
+                "required": []
+              },
+              "title": "additionalRules",
+              "type": "array"
+            },
+            "annotations": {
+              "description": "Add annotations to the route",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "apiVersion": {
+              "default": "gateway.networking.k8s.io/v1",
+              "description": "Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2",
+              "title": "apiVersion",
+              "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "description": "Enables or disables the route",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "filters": {
+              "description": "Filters define the filters that are applied to requests that match this rule.",
+              "items": {
+                "required": []
+              },
+              "title": "filters",
+              "type": "array"
+            },
+            "hostnames": {
+              "description": "Hostnames to be matched",
+              "items": {
+                "required": []
+              },
+              "title": "hostnames",
+              "type": "array"
+            },
+            "httpsRedirect": {
+              "default": false,
+              "description": "adds a filter for redirecting to https (HTTP 301 Moved Permanently). To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners. Matches and filters do not take effect if enabled. Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/",
+              "title": "httpsRedirect",
+              "type": "boolean"
+            },
+            "kind": {
+              "default": "HTTPRoute",
+              "description": "Set the route kind\nValid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute",
+              "title": "kind",
+              "type": "string"
+            },
+            "labels": {
+              "description": "Add labels to the route",
+              "required": [],
+              "title": "labels",
+              "type": "object"
+            },
+            "matches": {
+              "description": "define conditions used for matching the rule against incoming HTTP requests.",
+              "items": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "path": {
+                        "properties": {
+                          "type": {
+                            "default": "PathPrefix",
+                            "title": "type",
+                            "type": "string"
+                          },
+                          "value": {
+                            "default": "/",
+                            "title": "value",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "value"
+                        ],
+                        "title": "path",
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "path"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "required": []
+              },
+              "title": "matches",
+              "type": "array"
+            },
+            "parentRefs": {
+              "description": "Parent references (Gateway)",
+              "items": {
+                "required": []
+              },
+              "title": "parentRefs",
+              "type": "array"
+            }
+          },
+          "required": [
+            "enabled",
+            "apiVersion",
+            "kind",
+            "annotations",
+            "labels",
+            "hostnames",
+            "parentRefs",
+            "matches",
+            "filters",
+            "additionalRules",
+            "httpsRedirect"
+          ],
+          "title": "main",
+          "type": "object"
+        }
+      },
+      "required": [
+        "main"
+      ],
+      "title": "route",
+      "type": "object"
+    },
+    "securityContext": {
+      "description": "container-level security context",
+      "properties": {
+        "runAsGroup": {
+          "default": 65533,
+          "title": "runAsGroup",
+          "type": "integer"
+        },
+        "runAsNonRoot": {
+          "default": true,
+          "title": "runAsNonRoot",
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 1001,
+          "title": "runAsUser",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "runAsGroup",
+        "runAsNonRoot",
+        "runAsUser"
+      ],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "service": {
+      "properties": {
+        "port": {
+          "default": 3000,
+          "description": "Kubernetes port where service is exposed",
+          "title": "port",
+          "type": "integer"
+        },
+        "type": {
+          "default": "ClusterIP",
+          "description": "Kubernetes service type",
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "port"
+      ],
+      "title": "service",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "startupProbe": {
+      "properties": {
+        "failureThreshold": {
+          "default": 30,
+          "description": "Failure threshold for startupProbe",
+          "title": "failureThreshold",
+          "type": "integer"
+        },
+        "httpGet": {
+          "properties": {
+            "path": {
+              "default": "/",
+              "description": "Path for startupProbe",
+              "title": "path",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "title": "httpGet",
+          "type": "object"
+        },
+        "initialDelaySeconds": {
+          "default": 30,
+          "description": "Initial delay seconds for startupProbe",
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "periodSeconds": {
+          "default": 10,
+          "description": "Period seconds for startupProbe",
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "default": 1,
+          "description": "Success threshold for startupProbe",
+          "title": "successThreshold",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 1,
+          "description": "Timeout seconds for startupProbe",
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "failureThreshold",
+        "httpGet",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "successThreshold",
+        "timeoutSeconds"
+      ],
+      "title": "startupProbe",
+      "type": "object"
+    },
+    "tolerations": {
+      "description": "Toleration labels for pod assignment",
+      "items": {
+        "required": []
+      },
+      "title": "tolerations",
+      "type": "array"
+    },
+    "umami": {
+      "properties": {
+        "appSecret": {
+          "properties": {
+            "existingSecret": {
+              "default": "",
+              "description": "Name of an existing secret containing the app secret under the key app-secret.",
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "secret": {
+              "default": "",
+              "description": "A random string used to generate unique values.",
+              "title": "secret",
+              "type": "string"
+            }
+          },
+          "required": [
+            "existingSecret",
+            "secret"
+          ],
+          "title": "appSecret",
+          "type": "object"
+        },
+        "clientIpHeader": {
+          "default": "",
+          "description": "HTTP header to check for the client's IP address. This is useful when you're behind a proxy that uses non-standard headers.",
+          "title": "clientIpHeader",
+          "type": "string"
+        },
+        "cloudMode": {
+          "default": "0",
+          "description": "Disables users, teams, and websites settings page.",
+          "title": "cloudMode",
+          "type": "string"
+        },
+        "collectApiEndpoint": {
+          "default": "",
+          "description": "Allows you to send metrics to a location different than the default `/api/send`. This is to help you avoid some ad-blockers.",
+          "title": "collectApiEndpoint",
+          "type": "string"
+        },
+        "corsMaxAge": {
+          "default": "86400",
+          "description": "How many seconds a CORS preflight should last. Default is 24 hours.",
+          "title": "corsMaxAge",
+          "type": "string"
+        },
+        "customScript": {
+          "properties": {
+            "data": {
+              "default": "",
+              "description": "The custom script",
+              "title": "data",
+              "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "description": "Create and mount a ConfigMap with a custom script",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "key": {
+              "default": "script.js",
+              "description": "Key in the ConfigMap",
+              "title": "key",
+              "type": "string"
+            },
+            "mountPath": {
+              "default": "/app/public/script.js",
+              "description": "The path to mount the custom script to",
+              "title": "mountPath",
+              "type": "string"
+            }
+          },
+          "required": [
+            "enabled",
+            "data",
+            "key",
+            "mountPath"
+          ],
+          "title": "customScript",
+          "type": "object"
+        },
+        "debug": {
+          "default": "",
+          "description": "Console logging for specific areas of the application. Values include `umami:auth`, `umami:clickhouse`, `umami:kafka`, `umami:middleware`, and `umami:prisma`.",
+          "title": "debug",
+          "type": "string"
+        },
+        "disableBotCheck": {
+          "default": "1",
+          "description": "By default bots are excluded from statistics. This disables checking for bots.",
+          "title": "disableBotCheck",
+          "type": "string"
+        },
+        "disableLogin": {
+          "default": "1",
+          "description": "Disables the login page for the application",
+          "title": "disableLogin",
+          "type": "string"
+        },
+        "disableTelemetry": {
+          "default": "1",
+          "description": "Umami collects completely anonymous telemetry data in order help improve the application. You can choose to disable this if you don't want to participate.",
+          "title": "disableTelemetry",
+          "type": "string"
+        },
+        "disableUpdates": {
+          "default": "1",
+          "description": "Disables the check for new versions of Umami",
+          "title": "disableUpdates",
+          "type": "string"
+        },
+        "enableTestConsole": {
+          "default": "1",
+          "description": "Enables the internal test page, {host}/console. Admin access is required. Users can manually fire pageviews and events to their websites.",
+          "title": "enableTestConsole",
+          "type": "string"
+        },
+        "forceSSL": {
+          "default": "1",
+          "description": "This will redirect all requests from http to https in the Umami application. Note, this does not apply to the tracking script.",
+          "title": "forceSSL",
+          "type": "string"
+        },
+        "hostname": {
+          "default": "0.0.0.0",
+          "description": "hostname under which Umami will be reached",
+          "title": "hostname",
+          "type": "string"
+        },
+        "ignoreHostname": {
+          "default": "",
+          "description": "This will do a DNS lookup on a hostname and the resulting IP address will be ignored. This can be a comma delimited list of hostnames.",
+          "title": "ignoreHostname",
+          "type": "string"
+        },
+        "ignoredIpAddresses": {
+          "default": "",
+          "description": "You can provide a comma-delimited list of IP address to exclude from data collection.",
+          "title": "ignoredIpAddresses",
+          "type": "string"
+        },
+        "logQuery": {
+          "default": "1",
+          "description": "If you are running in development mode, this will log database queries to the console for debugging.",
+          "title": "logQuery",
+          "type": "string"
+        },
+        "migration": {
+          "properties": {
+            "v1v2": {
+              "properties": {
+                "enabled": {
+                  "default": false,
+                  "description": "enable a job that migrates database structure from v1 to v2",
+                  "title": "enabled",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "enabled"
+              ],
+              "title": "v1v2",
+              "type": "object"
+            }
+          },
+          "required": [
+            "v1v2"
+          ],
+          "title": "migration",
+          "type": "object"
+        },
+        "removeDisableLoginEnv": {
+          "default": true,
+          "description": "setting this to true removes the environment variable DISABLE_LOGIN defined in `umami.disableLogin` from the deployment as this caused errors in some setups",
+          "title": "removeDisableLoginEnv",
+          "type": "boolean"
+        },
+        "removeTrailingSlash": {
+          "default": "1",
+          "description": "Removes the trailing slash from all incoming urls.",
+          "title": "removeTrailingSlash",
+          "type": "string"
+        },
+        "trackerScriptName": {
+          "default": "umami",
+          "description": "Allows you to assign a custom name to the tracker script different from the default umami. This is to help you avoid some ad-blockers.",
+          "title": "trackerScriptName",
+          "type": "string"
+        }
+      },
+      "required": [
+        "appSecret",
+        "clientIpHeader",
+        "cloudMode",
+        "collectApiEndpoint",
+        "corsMaxAge",
+        "customScript",
+        "debug",
+        "disableBotCheck",
+        "disableLogin",
+        "disableTelemetry",
+        "disableUpdates",
+        "enableTestConsole",
+        "forceSSL",
+        "hostname",
+        "ignoreHostname",
+        "ignoredIpAddresses",
+        "logQuery",
+        "migration",
+        "removeDisableLoginEnv",
+        "removeTrailingSlash",
+        "trackerScriptName"
+      ],
+      "title": "umami",
+      "type": "object"
+    }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "image",
+    "imagePullSecrets",
+    "podAnnotations",
+    "podLabels",
+    "podSecurityContext",
+    "replicaCount",
+    "revisionHistoryLimit",
+    "resources",
+    "securityContext",
+    "serviceAccount",
+    "service",
+    "ingress",
+    "route",
+    "autoscaling",
+    "livenessProbe",
+    "readinessProbe",
+    "startupProbe",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "extraEnv",
+    "initContainers",
+    "umami",
+    "postgresql",
+    "mysql",
+    "externalDatabase",
+    "database"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,44 @@
+{{- if .Values.squest.autoscaling.enabled }}
+{{- if semverCompare ">=1.23-0" .Capabilities.KubeVersion.GitVersion }}
+apiVersion: autoscaling/v2
+{{- else }}
+apiVersion: autoscaling/v2beta1
+{{- end }}
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    {{- include "squest.squest.labels" . | nindent 4 }}
+  name: {{ include "squest.squest.fullname" . }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "squest.squest.fullname" . }}
+  minReplicas: {{ .Values.squest.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.squest.autoscaling.maxReplicas }}
+  metrics:
+    {{- if .Values.squest.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        {{- if semverCompare ">=1.23-0" .Capabilities.KubeVersion.GitVersion }}
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.squest.autoscaling.targetCPUUtilizationPercentage }}
+        {{- else }}
+        targetAverageUtilization: {{ .Values.squest.autoscaling.targetCPUUtilizationPercentage }}
+        {{- end }}
+    {{- end }}
+    {{- if .Values.squest.autoscaling.REDACTED }}
+    - type: Resource
+      resource:
+        name: memory
+        {{- if semverCompare ">=1.23-0" .Capabilities.KubeVersion.GitVersion }}
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.squest.autoscaling.REDACTED }}
+        {{- else }}
+        targetAverageUtilization: {{ .Values.squest.autoscaling.REDACTED }}
+        {{- end }}
+    {{- end }}
+{{- end }}
