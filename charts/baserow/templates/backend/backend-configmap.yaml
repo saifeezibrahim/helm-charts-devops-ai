@@ -1,0 +1,122 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "baserow.backend.fullname" . }}
+data:
+  # Baserow Backend Settings
+  REDACTED: {{ .Values.backend.config.tokens.accessTokenLifetimeMinutes | quote }}
+  REDACTED: {{ .Values.backend.config.airtableImportSoftTimeLimit | quote }}
+  {{- if .Values.backend.config.amountOfGunicornWorkers }}
+  REDACTED: {{ .Values.backend.config.amountOfGunicornWorkers | quote }}
+  {{- end }}
+  REDACTED: {{ .Values.backend.config.logging.databaseLogLevel | quote }}
+  BASEROW_BACKEND_DEBUG: {{ .Values.backend.config.logging.backendDebug | quote }}
+  BASEROW_BACKEND_LOG_LEVEL: {{ .Values.backend.config.logging.backendLogLevel | quote }}
+  {{- if and (.Values.backend.ingress.enabled) (.Values.backend.ingress.hostname) }}
+  BASEROW_EXTRA_ALLOWED_HOSTS: {{ .Values.backend.ingress.hostname | quote }}
+  {{- end }}
+  REDACTED: {{ .Values.backend.config.fileUploadSizeLimit | quote }}
+  REDACTED: {{ .Values.backend.config.tokens.refreshTokenLifetimeHours | quote }}
+  BASEROW_ROW_PAGE_SIZE_LIMIT: {{ .Values.backend.config.rowPageSizeLimit | quote }}
+  REDACTED: {{ .Values.backend.config.snapshotExpirationTimeDays | quote }}
+  REDACTED: {{ .Values.backend.config.syncTemplatesTimeLimit | quote }}
+  REDACTED: {{ .Values.backend.config.REDACTED | quote }}
+  BATCH_ROWS_SIZE_LIMIT: {{ .Values.backend.config.batchRowsSizeLimit | quote }}
+  {{- if .Values.backend.config.REDACTED }}
+  REDACTED: {{ .Values.backend.config.REDACTED | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.initialTableDataLimit }}
+  INITIAL_TABLE_DATA_LIMIT: {{ .Values.backend.config.initialTableDataLimit | quote }}
+  {{- end }}
+  MIGRATE_ON_STARTUP: {{ .Values.backend.config.migrateOnStartup | quote }}
+  POSTGRES_STARTUP_CHECK_ATTEMPTS: {{ .Values.backend.config.postgresStartupCheckAttempts | quote }}
+  # Baserow Backend Misc Configuration
+  {{- if .Values.backend.config.additionalApps }}
+  ADDITIONAL_APPS: {{ .Values.backend.config.additionalApps | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.disableModelCache }}
+  BASEROW_DISABLE_MODEL_CACHE: {{ .Values.backend.config.disableModelCache | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.enableSecureProxySslHeader }}
+  REDACTED: {{ .Values.backend.config.enableSecureProxySslHeader | quote }}
+  {{- end }}
+  REDACTED: {{ .Values.backend.config.initialCreateSyncTableDataLimit | quote }}
+  REDACTED: {{ .Values.backend.config.jobs.cleanupIntervalMinutes | quote }}
+  REDACTED: {{ .Values.backend.config.jobs.expirationTimeLimit | quote }}
+  BASEROW_JOB_SOFT_TIME_LIMIT: {{ .Values.backend.config.jobs.softTimeLimit | quote }}
+  REDACTED: {{ .Values.backend.config.maxFileImportErrorCount | quote }}
+  REDACTED: {{ .Values.backend.config.maxRowReportErrorCount | quote }}
+  {{- if .Values.backend.config.waitInsteadOf409ConflictError }}
+  REDACTED: {{ .Values.backend.config.waitInsteadOf409ConflictError | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.REDACTED }}
+  REDACTED: {{ .Values.backend.config.REDACTED | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.REDACTED }}
+  REDACTED: {{ .Values.backend.config.REDACTED | quote }}
+  {{- end }}
+  MINUTES_UNTIL_ACTION_CLEANED_UP: {{ .Values.backend.config.minutesUntilActionCleanedUp | quote }}
+  # Baserow Celery Settings
+  BASEROW_AMOUNT_OF_WORKERS: {{ .Values.backend.config.celery.amountOfWorkers | quote }}
+  BASEROW_CELERY_BEAT_DEBUG_LEVEL: {{ .Values.backend.config.celery.beatDebugLevel | quote }}
+  REDACTED: {{ .Values.backend.config.celery.beatStartupDelay | quote }}
+  BASEROW_RUN_MINIMAL: {{ .Values.backend.config.celery.runMinimal | quote }}
+  # Baserow Email Settings
+  {{- if .Values.backend.config.email.smtp }}
+  EMAIL_SMTP: {{ .Values.backend.config.email.smtp | quote }}
+  {{- if .Values.backend.config.email.smtpUseTls }}
+  EMAIL_SMTP_USE_TLS: {{ .Values.backend.config.email.smtpUseTls | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.email.smtpHost }}
+  EMAIL_SMTP_HOST: {{ .Values.backend.config.email.smtpHost | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.email.smtpPort }}
+  EMAIL_SMTP_PORT: {{ .Values.backend.config.email.smtpPort | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.email.smtpUser }}
+  EMAIL_SMTP_USER: {{ .Values.backend.config.email.smtpUser | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.email.fromEmail }}
+  FROM_EMAIL: {{ .Values.backend.config.email.fromEmail | quote }}
+  {{- end }}
+  {{- end }}
+  # Baserow File Upload Settings
+  AWS_STORAGE_BUCKET_NAME: {{ .Values.backend.config.aws.bucketName | quote }}
+  {{- if .Values.backend.config.aws.s3CustomDomain }}
+  AWS_S3_CUSTOM_DOMAIN: {{ .Values.backend.config.aws.s3CustomDomain | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.aws.s3EndpointUrl }}
+  AWS_S3_ENDPOINT_URL: {{ .Values.backend.config.aws.s3EndpointUrl | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.aws.s3RegionName }}
+  AWS_S3_REGION_NAME: {{ .Values.backend.config.aws.s3RegionName | quote }}
+  {{- end }}
+  MEDIA_ROOT: {{ .Values.backend.config.media.root | quote }}
+  MEDIA_URL: {{ .Values.backend.config.media.url | quote }}
+  # Baserow Webhook Settings
+  {{- if .Values.backend.config.webhook.allowPrivateAddress }}
+  REDACTED: {{ .Values.backend.config.webhook.allowPrivateAddress | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.webhook.ipBlacklist }}
+  BASEROW_WEBHOOKS_IP_BLACKLIST: {{ .Values.backend.config.webhook.ipBlacklist | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.webhook.ipWhitelist }}
+  BASEROW_WEBHOOKS_IP_WHITELIST: {{ .Values.backend.config.webhook.ipWhitelist | quote }}
+  {{- end }}
+  REDACTED: {{ .Values.backend.config.webhook.maxCallLogEntries | quote }}
+  REDACTED: {{ .Values.backend.config.webhook.maxConsecutiveTriggerFailures | quote }}
+  BASEROW_WEBHOOKS_MAX_PER_TABLE: {{ .Values.backend.config.webhook.maxPerTable | quote }}
+  REDACTED: {{ .Values.backend.config.webhook.maxRetriesPerCall | quote }}
+  REDACTED: {{ .Values.backend.config.webhook.requestTimeoutSeconds | quote }}
+  REDACTED: {{ .Values.backend.config.webhook.urlCheckTimeoutSecs | quote }}
+  {{- if .Values.backend.config.webhook.urlRegexBlacklist }}
+  REDACTED: {{ .Values.backend.config.webhook.urlRegexBlacklist | quote }}
+  {{- end }}
+  # Database Settings
+  DATABASE_HOST: {{ include "baserow.postgresql.hostname" . | quote }}
+  DATABASE_PORT: {{ include "baserow.postgresql.port" . | quote }}
+  DATABASE_NAME: {{ include "baserow.postgresql.database" . | quote }}
+  DATABASE_USER: {{ include "baserow.postgresql.username" . | quote }}
+  # Redis Settings
+  REDIS_HOST: {{ include "baserow.redis.hostname" . | quote }}
+  REDIS_PORT: {{ include "baserow.redis.port" . | quote }}

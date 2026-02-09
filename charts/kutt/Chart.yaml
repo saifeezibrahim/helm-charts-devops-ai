@@ -1,0 +1,41 @@
+apiVersion: v2
+name: kutt
+description: Kutt is a free modern URL shortener.
+type: application
+version: 8.3.8
+appVersion: "v3.2.3"
+home: https://github.com/christianhuth/helm-charts
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kutt/icon.svg
+maintainers:
+  - name: christianhuth
+    email: christian@knell.it
+sources:
+  - https://github.com/thedevs-network/kutt
+dependencies:
+  - name: postgresql
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 18.2.4
+    condition: postgresql.enabled
+  - name: redis
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 24.1.6
+    condition: redis.enabled
+annotations:
+  artifacthub.io/changes: |
+    - kind: changed
+      description: dependency of redis to 24.1.6
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
+  artifacthub.io/screenshots: |
+    - title: Simply shorten your link using the Web UI.
+      url: https://d4.alternativeto.net/REDACTED/rs:fit:1200:1200:0/g:ce:0:0/REDACTED.jpg
+    - title: You can see a list of the most recent created links and some statistical data about them.
+      url: https://docs.cloudron.io/img/kutt-admin.png
+    - title: View detailed statistics about each created link.
+      url: https://kutt.it/images/callout.png
+    - title: Kutt supports having more than one domain.
+      url: https://docs.cloudron.io/img/kutt-custom-domain.png
+  artifacthub.io/signKey: |
+    fingerprint: REDACTED
+    url: https://charts.christianhuth.de/public.key

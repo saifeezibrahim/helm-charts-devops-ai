@@ -1,0 +1,23 @@
+apiVersion: v2
+name: github-exporter
+description: A Helm Chart for the GitHub Prometheus Exporter
+type: application
+version: 2.3.0
+appVersion: "v2.2.0"
+home: https://github.com/christianhuth/helm-charts
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/github-exporter/icon.svg
+maintainers:
+  - name: christianhuth
+    email: christian@knell.it
+sources:
+  - https://github.com/githubexporter/github-exporter
+annotations:
+  artifacthub.io/changes: |
+    - kind: changed
+      description: App Version to v2.2.0
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
+  artifacthub.io/signKey: |
+    fingerprint: REDACTED
+    url: https://charts.christianhuth.de/public.key
